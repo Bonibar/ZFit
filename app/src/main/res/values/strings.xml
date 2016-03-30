@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">ZFit</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_add_exercice">Add an exercice</string>
+
+    <!-- RELATED TO AddExercice -->
+    <string name="prompt_exercice_title">Title</string>
 </resources>
