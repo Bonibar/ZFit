@@ -34,7 +34,7 @@
             android:id="@+id/view">
 
             <AutoCompleteTextView
-                android:id="@+id/title"
+                android:id="@+id/title_exercice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_exercice_title"
@@ -54,8 +54,21 @@
         android:layout_margin="@dimen/fab_margin"
         android:src="@android:drawable/ic_input_add"
         android:focusableInTouchMode="false"
+        android:onClick="addExercice"
         android:tint="#ffffff"
         app:backgroundTint="#1dff25" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/returnbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@android:drawable/ic_delete"
+        android:focusableInTouchMode="false"
+        android:onClick="cancelActivity"
+        android:tint="#ffffff"
+        app:backgroundTint="#ff5d1d" />
 
 </android.support.design.widget.CoordinatorLayout>
 </android.support.v4.widget.DrawerLayout>

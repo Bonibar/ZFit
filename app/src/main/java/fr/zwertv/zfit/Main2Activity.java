@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,9 +14,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main2Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    List<String> values = new ArrayList<String>() {{
+        add("Test1");
+        add("Test2");
+    }};
+    ArrayAdapter<String> adaptater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +54,11 @@ public class Main2Activity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        values.add("Test3");
+        adaptater = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, values);
+        ListView l = (ListView) findViewById(R.id.listView);
+        l.setAdapter(adaptater);
     }
 
     @Override
@@ -82,7 +99,7 @@ public class Main2Activity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        /*if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
@@ -94,15 +111,27 @@ public class Main2Activity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
-        }
+        }*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
+    private static int EXERCICE_REQUEST_CODE = 16843;
     public void createExercice(View view) {
         Intent intent = new Intent(this, AddExerciceActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, EXERCICE_REQUEST_CODE);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == EXERCICE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                String title = data.getStringExtra("exercice_title");
+                values.add(title);
+                adaptater.notifyDataSetChanged();
+                Log.d("AJOUT EXERCICE", title);
+            }
+        }
     }
 }
